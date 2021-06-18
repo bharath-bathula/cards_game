@@ -40,14 +40,27 @@ class _CardDataState extends State<CardData> {
                     padding: const EdgeInsets.all(8.0),
                     child: ListView(children: [
                       Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20)),
-                          child: Text('${snapshot.data!.name}')),
+                          child: Text(
+                            '${snapshot.data!.name}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 23,
+                                color: Color(0xFF657d6b)),
+                          )),
                       Stack(children: [
                         Container(
+                          margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 8,
+                            ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black,
@@ -93,18 +106,94 @@ class _CardDataState extends State<CardData> {
                         // ),
                       ]),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
-                      Text(
-                          'intelligence: ${snapshot.data!.biography.publisher}'),
-                      Text(
-                          'intelligence: ${snapshot.data!.powerstats.intelligence}'),
-                      Text('strength: ${snapshot.data!.powerstats.strength}'),
-                      Text('speed: ${snapshot.data!.powerstats.speed}'),
-                      Text(
-                          'durability: ${snapshot.data!.powerstats.durability}'),
-                      Text('power: ${snapshot.data!.powerstats.power}'),
-                      Text('combat: ${snapshot.data!.powerstats.combat}'),
+                      Container(
+                        height: 45,
+                        alignment: Alignment.center,
+                        child: FittedBox(
+                          fit: BoxFit.fill,
+                          child: 'Marvel Comics' ==
+                                  snapshot.data!.biography.publisher
+                              ? Image.asset('assets/marvelcomics.jpg')
+                              : 'DC Comics' ==
+                                      snapshot.data!.biography.publisher
+                                  ? Image.asset('assets/dccomics.png')
+                                  : Text(
+                                      snapshot.data!.biography.publisher,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                          // Image(image: AssetImage('assets/marvelcomics.jpg')),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                'Intelligence',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Strength',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Speed',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Durability',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Power',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Combat',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                ': ${snapshot.data!.powerstats.intelligence}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                ': ${snapshot.data!.powerstats.strength}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                ': ${snapshot.data!.powerstats.speed}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                ': ${snapshot.data!.powerstats.durability}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                ': ${snapshot.data!.powerstats.power}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                ': ${snapshot.data!.powerstats.combat}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Container(
                         height: 60,
                         width: MediaQuery.of(context).size.width,

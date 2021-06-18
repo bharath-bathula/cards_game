@@ -39,60 +39,64 @@ class _CardDataState extends State<CardData> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListView(children: [
+                      Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Text('${snapshot.data!.name}')),
                       Stack(children: [
                         Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                offset: const Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 10.0,
+                                spreadRadius: 2.0,
+                              ),
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: const Offset(0.0, 0.0),
+                                blurRadius: 0.0,
+                                spreadRadius: 0.0,
+                              ),
+                            ],
+                          ),
                           height: MediaQuery.of(context).size.height * 0.5,
                           width: MediaQuery.of(context).size.width,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                snapshot.data!.image.url,
-                              ),
+                          child: Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                              snapshot.data!.image.url,
                             ),
                           ),
                         ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                child: Text(snapshot.data!.id),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Container(
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Text('${snapshot.data!.name}')),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          top: MediaQuery.of(context).size.height * 0.431,
-                          child: Container(
-                            height: 60,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.transparent,
-                                    Colors.white,
-                                  ],
-                                )),
-                          ),
-                        ),
+                        // Positioned(
+                        //   top: MediaQuery.of(context).size.height * 0.431,
+                        //   child: Container(
+                        //     height: 60,
+                        //     width: MediaQuery.of(context).size.width,
+                        //     decoration: BoxDecoration(
+                        //         gradient: LinearGradient(
+                        //       begin: Alignment.topCenter,
+                        //       end: Alignment.bottomCenter,
+                        //       colors: [
+                        //         Colors.transparent,
+                        //         Colors.white,
+                        //       ],
+                        //     )),
+                        //   ),
+                        // ),
                       ]),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Text(
                           'intelligence: ${snapshot.data!.biography.publisher}'),
-                      // Image.network(snapshot.data!.image.url),
                       Text(
                           'intelligence: ${snapshot.data!.powerstats.intelligence}'),
                       Text('strength: ${snapshot.data!.powerstats.strength}'),
@@ -101,27 +105,6 @@ class _CardDataState extends State<CardData> {
                           'durability: ${snapshot.data!.powerstats.durability}'),
                       Text('power: ${snapshot.data!.powerstats.power}'),
                       Text('combat: ${snapshot.data!.powerstats.combat}'),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('End Game'),
-                            ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    data = dataReturn();
-
-                                    print('SetState');
-                                  });
-                                },
-                                child: Text('Next Card'))
-                          ],
-                        ),
-                      ),
                       Container(
                         height: 60,
                         width: MediaQuery.of(context).size.width,

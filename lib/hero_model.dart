@@ -30,7 +30,7 @@ class HeroModel {
   Appearance appearance;
   Work work;
   Connections connections;
-  Image image;
+  ImageUrl image;
 
   factory HeroModel.fromJson(Map<String, dynamic> json) => HeroModel(
         response: json["response"],
@@ -41,7 +41,7 @@ class HeroModel {
         appearance: Appearance.fromJson(json["appearance"]),
         work: Work.fromJson(json["work"]),
         connections: Connections.fromJson(json["connections"]),
-        image: Image.fromJson(json["image"]),
+        image: ImageUrl.fromJson(json["image"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -153,14 +153,14 @@ class Connections {
       };
 }
 
-class Image {
-  Image({
+class ImageUrl {
+  ImageUrl({
     required this.url,
   });
 
   String url;
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory ImageUrl.fromJson(Map<String, dynamic> json) => ImageUrl(
         url: json["url"],
       );
 

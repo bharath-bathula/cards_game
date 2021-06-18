@@ -10,15 +10,16 @@ class CardDisplay extends StatefulWidget {
   final String power;
   final String combat;
 
-  CardDisplay(
-      {required this.imageUrl,
-      required this.name,
-      required this.intelligence,
-      required this.strength,
-      required this.speed,
-      required this.durability,
-      required this.power,
-      required this.combat});
+  CardDisplay({
+    required this.imageUrl,
+    required this.name,
+    required this.intelligence,
+    required this.strength,
+    required this.speed,
+    required this.durability,
+    required this.power,
+    required this.combat,
+  });
 
   @override
   _CardDisplayState createState() => _CardDisplayState();
@@ -27,8 +28,7 @@ class CardDisplay extends StatefulWidget {
 class _CardDisplayState extends State<CardDisplay> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 7,
+    return Container(
       child: Column(
         children: [
           Image.network(widget.imageUrl),
@@ -39,13 +39,6 @@ class _CardDisplayState extends State<CardDisplay> {
           Text('durability: ${widget.durability}'),
           Text('power: ${widget.power}'),
           Text('combat: ${widget.combat}'),
-          ElevatedButton(
-              onPressed: () {
-                setState(
-                  () {},
-                );
-              },
-              child: Text('Next Card'))
         ],
       ),
     );

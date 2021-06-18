@@ -29,138 +29,150 @@ class _CardDataState extends State<CardData> {
                 ),
               );
             } else if (snapshot.hasData) {
-              return Container(
-                padding: EdgeInsets.all(10),
+              return SafeArea(
                 child: Card(
+                  margin: EdgeInsets.all(7),
+                  elevation: 15,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: ListView(children: [
-                    Stack(children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        width: MediaQuery.of(context).size.width,
-                        child: Image.network(
-                          snapshot.data!.image.url,
-                          fit: BoxFit.cover,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView(children: [
+                      Stack(children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          width: MediaQuery.of(context).size.width,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                snapshot.data!.image.url,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      Container(
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                child: Text(snapshot.data!.id),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Text('${snapshot.data!.name}')),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: MediaQuery.of(context).size.height * 0.431,
+                          child: Container(
+                            height: 60,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.white,
+                                  ],
+                                )),
+                          ),
+                        ),
+                      ]),
+                      Text(
+                          'intelligence: ${snapshot.data!.biography.publisher}'),
+                      // Image.network(snapshot.data!.image.url),
+                      Text(
+                          'intelligence: ${snapshot.data!.powerstats.intelligence}'),
+                      Text('strength: ${snapshot.data!.powerstats.strength}'),
+                      Text('speed: ${snapshot.data!.powerstats.speed}'),
+                      Text(
+                          'durability: ${snapshot.data!.powerstats.durability}'),
+                      Text('power: ${snapshot.data!.powerstats.power}'),
+                      Text('combat: ${snapshot.data!.powerstats.combat}'),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CircleAvatar(
-                              child: Text(snapshot.data!.id),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text('End Game'),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Text('${snapshot.data!.name}')),
+                            ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    data = dataReturn();
+
+                                    print('SetState');
+                                  });
+                                },
+                                child: Text('Next Card'))
                           ],
                         ),
                       ),
-                      Positioned(
-                        top: MediaQuery.of(context).size.height * 0.431,
-                        child: Container(
-                          height: 60,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.white,
-                            ],
-                          )),
+                      Container(
+                        height: 60,
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            MaterialButton(
+                              onPressed: () {
+                                setState(() {
+                                  wins++;
+                                  print("wins");
+
+                                  print(wins);
+                                  data = dataReturn();
+                                });
+                              },
+                              child: Icon(
+                                Icons.check,
+                                size: 32,
+                              ),
+                              padding: EdgeInsets.all(8),
+                              shape: CircleBorder(),
+                              color: Colors.greenAccent,
+                            ),
+                            SizedBox(
+                              width: 40,
+                            ),
+                            MaterialButton(
+                              onPressed: () {
+                                setState(() {
+                                  lost++;
+                                  print("lost");
+
+                                  print(lost);
+
+                                  data = dataReturn();
+                                });
+                              },
+                              child: Icon(
+                                Icons.close_rounded,
+                                size: 32,
+                              ),
+                              padding: EdgeInsets.all(8),
+                              shape: CircleBorder(),
+                              color: Colors.redAccent,
+                            )
+                          ],
                         ),
                       ),
                     ]),
-                    Text('intelligence: ${snapshot.data!.biography.publisher}'),
-                    // Image.network(snapshot.data!.image.url),
-                    Text(
-                        'intelligence: ${snapshot.data!.powerstats.intelligence}'),
-                    Text('strength: ${snapshot.data!.powerstats.strength}'),
-                    Text('speed: ${snapshot.data!.powerstats.speed}'),
-                    Text('durability: ${snapshot.data!.powerstats.durability}'),
-                    Text('power: ${snapshot.data!.powerstats.power}'),
-                    Text('combat: ${snapshot.data!.powerstats.combat}'),
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Text('End Game'),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  data = dataReturn();
-
-                                  print('SetState');
-                                });
-                              },
-                              child: Text('Next Card'))
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 60,
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                wins++;
-                                print("wins");
-
-                                print(wins);
-                                data = dataReturn();
-                              });
-                            },
-                            child: Icon(
-                              Icons.check,
-                              size: 32,
-                            ),
-                            padding: EdgeInsets.all(8),
-                            shape: CircleBorder(),
-                            color: Colors.greenAccent,
-                          ),
-                          SizedBox(
-                            width: 40,
-                          ),
-                          MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                lost++;
-                                print("lost");
-
-                                print(lost);
-
-                                data = dataReturn();
-                              });
-                            },
-                            child: Icon(
-                              Icons.close_rounded,
-                              size: 32,
-                            ),
-                            padding: EdgeInsets.all(8),
-                            shape: CircleBorder(),
-                            color: Colors.redAccent,
-                          )
-                        ],
-                      ),
-                    ),
-                  ]),
+                  ),
                 ),
               );
             } else if (snapshot.hasError) {

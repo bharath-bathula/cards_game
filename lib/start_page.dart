@@ -16,7 +16,7 @@ class StartPage extends StatelessWidget {
         child: ElevatedButton(
           child: Text('Start Game'),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, CardData.route);
+            Navigator.pushNamed(context, CardData.route);
           },
         ),
       ),

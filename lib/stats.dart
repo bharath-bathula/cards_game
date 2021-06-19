@@ -1,15 +1,12 @@
+import 'package:cards_game/start_page.dart';
 import 'package:flutter/material.dart';
 
 class Stats extends StatelessWidget {
-  final int won;
-  final int lost;
-  Stats({
-    required this.won,
-    required this.lost,
-  });
+  static const route = 'stats';
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Stats'),
@@ -17,17 +14,17 @@ class Stats extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-            Container(child: Text('Wins : $won')),
-            Container(child: Text('Lost : $lost')),
+            Container(child: Text('Wins : ${args.win}')),
+            Container(child: Text('Lost : ${args.lost}')),
             Container(
-                child: won > lost
+                child: args.win > args.lost
                     ? Text('You Win')
-                    : won == lost
+                    : args.win == args.lost
                         ? Text('Its a Draw')
                         : Text('You Lost')),
             IconButton(
                 onPressed: () {
-                  Navigator.of(context).popUntil((route) => false);
+                  Navigator.popAndPushNamed(context, StartPage.route);
                 },
                 icon: Icon(Icons.home))
           ],
@@ -35,4 +32,11 @@ class Stats extends StatelessWidget {
       ),
     );
   }
+}
+
+class ScreenArguments {
+  final int win;
+  final int lost;
+
+  ScreenArguments(this.win, this.lost);
 }

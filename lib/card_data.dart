@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 
 import './hero_model.dart';
+import './stats.dart';
 
 class CardData extends StatefulWidget {
+  static const route = 'cardData';
   const CardData({Key? key}) : super(key: key);
 
   @override
@@ -39,20 +41,35 @@ class _CardDataState extends State<CardData> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListView(children: [
-                      Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Text(
-                            '${snapshot.data!.name}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 23,
-                                color: Color(0xFF657d6b)),
-                          )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                              // width: double.infinity,
+                              // alignment: Alignment.center,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Text(
+                                '${snapshot.data!.name}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 23,
+                                    color: Color(0xFF657d6b)),
+                              )),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, Stats.route,
+                                    arguments: ScreenArguments(wins, lost));
+                              },
+                              icon: Icon(Icons.exit_to_app_sharp)),
+                        ],
+                      ),
                       Stack(children: [
                         Container(
                           margin: EdgeInsets.all(8),

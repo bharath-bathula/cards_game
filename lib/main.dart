@@ -1,5 +1,7 @@
+import 'package:cards_game/card_data.dart';
 import 'package:flutter/material.dart';
-import './card_data.dart';
+import './start_page.dart';
+import './stats.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CardData(),
+      // home: StartPage(),
+      initialRoute: StartPage.route,
+      routes: {
+        StartPage.route: (context) => StartPage(),
+        CardData.route: (context) => CardData(),
+        Stats.route: (context) => Stats(),
+      },
     );
   }
 }

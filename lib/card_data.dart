@@ -297,6 +297,7 @@ Future<HeroModel> dataReturn() async {
   print(heroData.data['name']);
 
   var heroModel = HeroModel.fromJson(heroData.data);
+  var heroModal;
 
   print(heroModel.id);
   print(heroModel.name);
@@ -321,8 +322,20 @@ Future<HeroModel> dataReturn() async {
       heroModel.appearance.height == null ||
       // ignore: unnecessary_null_comparison
       heroModel.appearance.weight == null) {
-    dataReturn();
+    var dio = Dio();
+
+    int id = randomGen();
+
+    var heroData =
+        await dio.get('https://superheroapi.com/api/3987559941340811/$id');
+    print('step1');
+
+    print(heroData.data['name']);
+
+    var heroModel = HeroModel.fromJson(heroData.data);
+    heroModal = heroModel;
   } else {
-    return heroModel;
+    heroModal = heroModel;
   }
+  return heroModal;
 }

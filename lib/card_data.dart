@@ -303,5 +303,26 @@ Future<HeroModel> dataReturn() async {
   print(heroModel.image);
   print(heroModel.powerstats);
 
-  return heroModel;
+  // ignore: unnecessary_null_comparison
+  if (heroModel.name == 'null' ||
+      // ignore: unnecessary_null_comparison
+      heroModel.image.url == 'null' ||
+      // ignore: unnecessary_null_comparison
+      heroModel.powerstats.combat == 'null' ||
+      // ignore: unnecessary_null_comparison
+      heroModel.powerstats.durability == 'null' ||
+      // ignore: unnecessary_null_comparison
+      heroModel.powerstats.intelligence == 'null' ||
+      // ignore: unnecessary_null_comparison
+      heroModel.powerstats.power == 'null' ||
+      // ignore: unnecessary_null_comparison
+      heroModel.powerstats.speed == 'null' ||
+      // ignore: unnecessary_null_comparison
+      heroModel.appearance.height == null ||
+      // ignore: unnecessary_null_comparison
+      heroModel.appearance.weight == null) {
+    dataReturn();
+  } else {
+    return heroModel;
+  }
 }

@@ -21,6 +21,17 @@ class _CardDataState extends State<CardData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.yellow[600],
+        child: Icon(Icons.exit_to_app_outlined),
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, Stats.route,
+              arguments: ScreenArguments(wins, lost));
+        },
+        mini: true,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
       body: FutureBuilder<HeroModel>(
           future: data,
           builder: (context, snapshot) {
@@ -33,43 +44,51 @@ class _CardDataState extends State<CardData> {
             } else if (snapshot.hasData) {
               return SafeArea(
                 child: Card(
-                  margin: EdgeInsets.all(7),
+                  // margin: EdgeInsets.all(7),
                   elevation: 15,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListView(children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                              // width: double.infinity,
-                              // alignment: Alignment.center,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Text(
-                                '${snapshot.data!.name}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23,
-                                    color: Color(0xFF657d6b)),
-                              )),
-                          IconButton(
-                              onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, Stats.route,
-                                    arguments: ScreenArguments(wins, lost));
-                              },
-                              icon: Icon(Icons.exit_to_app_sharp)),
-                        ],
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 8,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black,
+                          offset: const Offset(
+                            5.0,
+                            5.0,
+                          ),
+                          blurRadius: 10.0,
+                          spreadRadius: 2.0,
+                        ),
+                        BoxShadow(
+                          color: Colors.white,
+                          offset: const Offset(0.0, 0.0),
+                          blurRadius: 0.0,
+                          spreadRadius: 0.0,
+                        ),
+                      ],
+                    ),
+                    // padding: const EdgeInsets.all(8.0),
+                    child: ListView(children: [
+                      Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Text(
+                            '${snapshot.data!.name}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 23,
+                                color: Color(0xFF657d6b)),
+                          )),
                       Stack(children: [
                         Container(
                           margin: EdgeInsets.all(8),
@@ -96,7 +115,7 @@ class _CardDataState extends State<CardData> {
                               ),
                             ],
                           ),
-                          height: MediaQuery.of(context).size.height * 0.5,
+                          height: MediaQuery.of(context).size.height * 0.43,
                           width: MediaQuery.of(context).size.width,
                           child: Image(
                             fit: BoxFit.cover,
@@ -123,10 +142,11 @@ class _CardDataState extends State<CardData> {
                         // ),
                       ]),
                       SizedBox(
-                        height: 15,
+                        height: 10,
                       ),
                       Container(
                         height: 45,
+                        width: double.infinity,
                         alignment: Alignment.center,
                         child: FittedBox(
                           fit: BoxFit.fill,
@@ -141,7 +161,6 @@ class _CardDataState extends State<CardData> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
-                          // Image(image: AssetImage('assets/marvelcomics.jpg')),
                         ),
                       ),
                       SizedBox(
@@ -151,6 +170,7 @@ class _CardDataState extends State<CardData> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Intelligence',
@@ -179,6 +199,7 @@ class _CardDataState extends State<CardData> {
                             ],
                           ),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 ': ${snapshot.data!.powerstats.intelligence}',
@@ -215,7 +236,7 @@ class _CardDataState extends State<CardData> {
                         height: 60,
                         width: MediaQuery.of(context).size.width,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MaterialButton(
                               onPressed: () {

@@ -9,16 +9,26 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Welcome to Cards Game'),
-      ),
-      body: Container(
-        child: ElevatedButton(
-          child: Text('Start Game'),
-          onPressed: () {
-            Navigator.pushNamed(context, CardData.route);
-          },
-        ),
+      // appBar: AppBar(
+      //   title: Text('Welcome to Cards Game'),
+      // ),
+      body: SafeArea(
+        child: Stack(children: [
+          Image.asset(
+            'assets/startbg.png',
+            fit: BoxFit.cover,
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.65,
+            left: MediaQuery.of(context).size.width * 0.375,
+            child: ElevatedButton(
+              child: Text('Start Game'),
+              onPressed: () {
+                Navigator.pushNamed(context, CardData.route);
+              },
+            ),
+          ),
+        ]),
       ),
     );
   }

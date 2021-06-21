@@ -44,35 +44,12 @@ class _CardDataState extends State<CardData> {
             } else if (snapshot.hasData) {
               return SafeArea(
                 child: Card(
-                  // margin: EdgeInsets.all(7),
-                  elevation: 15,
+                  margin: EdgeInsets.all(7),
+                  elevation: 30,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 8,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          offset: const Offset(
-                            5.0,
-                            5.0,
-                          ),
-                          blurRadius: 10.0,
-                          spreadRadius: 2.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          offset: const Offset(0.0, 0.0),
-                          blurRadius: 0.0,
-                          spreadRadius: 0.0,
-                        ),
-                      ],
-                    ),
                     // padding: const EdgeInsets.all(8.0),
                     child: ListView(children: [
                       Container(

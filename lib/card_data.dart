@@ -1,12 +1,12 @@
 import 'dart:ui';
-
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cards_game/guide.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 import './logic.dart';
-
 import './hero_model.dart';
 import './stats.dart';
-import 'dart:math' as math;
 
 class CardData extends StatefulWidget {
   static const route = 'cardData';
@@ -77,7 +77,9 @@ class _CardDataState extends State<CardData> {
                               ),
                             ),
                             MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, Guide.route);
+                              },
                               child: Text(
                                 '?',
                                 style: TextStyle(
@@ -122,32 +124,37 @@ class _CardDataState extends State<CardData> {
                                   child: BackdropFilter(
                                     filter: ImageFilter.blur(
                                         sigmaX: 2.0, sigmaY: 2.0),
-                                    child: Image(
-                                      fit: BoxFit.fitHeight,
-                                      image: NetworkImage(
-                                        snapshot.data!.image.url,
-                                      ),
+                                    child: CachedNetworkImage(
+                                      imageUrl: snapshot.data!.image.url,
+                                      placeholder: (context, url) =>
+                                          CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
                                     ),
+                                    //  Image(
+                                    //   fit: BoxFit.fitHeight,
+                                    //   image: NetworkImage(
+                                    //     snapshot.data!.image.url,
+                                    //   ),
                                   ),
                                 ),
                               ),
-
-                              // Positioned(
-                              //   top: MediaQuery.of(context).size.height * 0.431,
-                              //   child: Container(
-                              //     height: 60,
-                              //     width: MediaQuery.of(context).size.width,
-                              //     decoration: BoxDecoration(
-                              //         gradient: LinearGradient(
-                              //       begin: Alignment.topCenter,
-                              //       end: Alignment.bottomCenter,
-                              //       colors: [
-                              //         Colors.transparent,
-                              //         Colors.white,
-                              //       ],
-                              //     )),
-                              //   ),
-                              // ),
+                              Positioned(
+                                top: MediaQuery.of(context).size.height * 0.431,
+                                child: Container(
+                                  height: 60,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.transparent,
+                                      Colors.white,
+                                    ],
+                                  )),
+                                ),
+                              ),
                             ]),
                             Container(
                               padding: EdgeInsets.all(8),
@@ -335,14 +342,17 @@ class _CardDataState extends State<CardData> {
                         children: [
                           MaterialButton(
                             onPressed: () {
-                              setState(() {
-                                lost++;
-                                print("lost");
+                              lost++;
+                              print("lost");
 
-                                print(lost);
-
-                                data = dataReturn();
-                              });
+                              if (wins + lost >= 60) {
+                                Navigator.pushNamed(context, Stats.route,
+                                    arguments: ScreenArguments(wins, lost));
+                              } else {
+                                setState(() {
+                                  data = dataReturn();
+                                });
+                              }
                             },
                             child: Icon(
                               Icons.close_rounded,
@@ -354,13 +364,18 @@ class _CardDataState extends State<CardData> {
                           ),
                           MaterialButton(
                             onPressed: () {
-                              setState(() {
-                                wins++;
-                                print("wins");
+                              wins++;
+                              print("wins");
+                              print(wins);
 
-                                print(wins);
-                                data = dataReturn();
-                              });
+                              if (wins + lost >= 60) {
+                                Navigator.pushNamed(context, Stats.route,
+                                    arguments: ScreenArguments(wins, lost));
+                              } else {
+                                setState(() {
+                                  data = dataReturn();
+                                });
+                              }
                             },
                             child: Icon(
                               Icons.check,

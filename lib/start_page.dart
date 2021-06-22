@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './card_data.dart';
+import './guide.dart';
 
 class StartPage extends StatelessWidget {
   static const route = 'start';
@@ -9,15 +10,25 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Welcome to Cards Game'),
-      // ),
       body: SafeArea(
           child: Container(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Color(0xff012257)),
+                child: Text(
+                  'How to Play',
+                  style: TextStyle(fontSize: 14),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, Guide.route);
+                },
+              ),
+              SizedBox(
+                height: 75,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Color(0xffF98700)),
                 child: Text(

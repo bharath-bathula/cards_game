@@ -1,5 +1,7 @@
-import 'package:cards_game/card_data.dart';
 import 'package:flutter/material.dart';
+
+import './card_data.dart';
+import './guide.dart';
 import './start_page.dart';
 import './stats.dart';
 
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
         StartPage.route: (context) => StartPage(),
         CardData.route: (context) => CardData(),
         Stats.route: (context) => Stats(),
+        Guide.route: (context) => Guide(),
       },
     );
   }

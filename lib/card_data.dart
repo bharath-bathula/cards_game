@@ -126,8 +126,10 @@ class _CardDataState extends State<CardData> {
                                         sigmaX: 2.0, sigmaY: 2.0),
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data!.image.url,
-                                      placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
+                                      placeholder: (context, url) => Image(
+                                        image: AssetImage('assets/loading.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
                                       errorWidget: (context, url, error) =>
                                           Icon(Icons.error),
                                     ),

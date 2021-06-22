@@ -86,7 +86,7 @@ class Stats extends StatelessWidget {
                                   color: Colors.red),
                             )),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.2,
               ),
               IconButton(
                   onPressed: () {

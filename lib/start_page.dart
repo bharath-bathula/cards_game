@@ -13,23 +13,32 @@ class StartPage extends StatelessWidget {
       //   title: Text('Welcome to Cards Game'),
       // ),
       body: SafeArea(
-        child: Stack(children: [
-          Image.asset(
-            'assets/startbg.png',
-            fit: BoxFit.cover,
+          child: Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Color(0xffF98700)),
+                child: Text('Start Game'),
+                onPressed: () {
+                  Navigator.pushNamed(context, CardData.route);
+                },
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.29,
+              ),
+              Image.asset('assets/superheroflying.png'),
+            ],
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.65,
-            left: MediaQuery.of(context).size.width * 0.375,
-            child: ElevatedButton(
-              child: Text('Start Game'),
-              onPressed: () {
-                Navigator.pushNamed(context, CardData.route);
-              },
-            ),
-          ),
-        ]),
-      ),
+        ),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  'assets/bg.jpg',
+                ),
+                fit: BoxFit.cover)),
+      )),
     );
   }
 }

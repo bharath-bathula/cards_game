@@ -1,11 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'package:dio/dio.dart';
+
+import './logic.dart';
 
 import './hero_model.dart';
 import './stats.dart';
+import 'dart:math' as math;
 
 class CardData extends StatefulWidget {
   static const route = 'cardData';
@@ -48,9 +49,13 @@ class _CardDataState extends State<CardData> {
                                     context, Stats.route,
                                     arguments: ScreenArguments(wins, lost));
                               },
-                              child: Icon(
-                                Icons.exit_to_app_rounded,
-                                size: 32,
+                              child: Transform(
+                                alignment: Alignment.center,
+                                transform: Matrix4.rotationY(math.pi),
+                                child: Icon(
+                                  Icons.exit_to_app_rounded,
+                                  size: 32,
+                                ),
                               ),
                               padding: EdgeInsets.all(8),
                               elevation: 0,
@@ -73,9 +78,11 @@ class _CardDataState extends State<CardData> {
                             ),
                             MaterialButton(
                               onPressed: () {},
-                              child: Icon(
-                                Icons.question_answer_sharp,
-                                size: 32,
+                              child: Text(
+                                '?',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                ),
                               ),
                               padding: EdgeInsets.all(8),
                               elevation: 0,
@@ -158,13 +165,11 @@ class _CardDataState extends State<CardData> {
                                         : 'DC Comics' ==
                                                 snapshot
                                                     .data!.biography.publisher
-                                            ? Image.asset('assets/dccomics.png')
+                                            ? Image.asset('assets/dccomic.png')
                                             : Text(
                                                 snapshot
                                                     .data!.biography.publisher,
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                style: TextStyle(fontSize: 28),
                                               ),
                                   ),
                                   SizedBox(
@@ -373,75 +378,11 @@ class _CardDataState extends State<CardData> {
               } else if (snapshot.hasError) {
                 showDialog(context: context, builder: (_) => (Text("Error")));
               }
-              return Column(
-                children: [
-                  Text('went to return'),
-                  Center(child: CircularProgressIndicator()),
-                ],
+              return Center(
+                child: CircularProgressIndicator(),
               );
             }),
       ),
     );
   }
-}
-
-int randomGen() {
-  Random random = new Random();
-  int id = random.nextInt(730) + 1;
-  return id;
-}
-
-Future<HeroModel> dataReturn() async {
-  var dio = Dio();
-
-  int id = randomGen();
-
-  var heroData =
-      await dio.get('https://superheroapi.com/api/3987559941340811/$id');
-  print('step1');
-
-  print(heroData.data['name']);
-
-  var heroModel = HeroModel.fromJson(heroData.data);
-  var heroModal;
-
-  print(heroModel.id);
-  print(heroModel.name);
-  print(heroModel.image);
-  print(heroModel.powerstats);
-
-  // ignore: unnecessary_null_comparison
-  if (heroModel.name == 'null' ||
-      // ignore: unnecessary_null_comparison
-      heroModel.image.url == 'null' ||
-      // ignore: unnecessary_null_comparison
-      heroModel.powerstats.combat == 'null' ||
-      // ignore: unnecessary_null_comparison
-      heroModel.powerstats.durability == 'null' ||
-      // ignore: unnecessary_null_comparison
-      heroModel.powerstats.intelligence == 'null' ||
-      // ignore: unnecessary_null_comparison
-      heroModel.powerstats.power == 'null' ||
-      // ignore: unnecessary_null_comparison
-      heroModel.powerstats.speed == 'null' ||
-      // ignore: unnecessary_null_comparison
-      heroModel.appearance.height == null ||
-      // ignore: unnecessary_null_comparison
-      heroModel.appearance.weight == null) {
-    var dio = Dio();
-
-    int id = randomGen();
-
-    var heroData =
-        await dio.get('https://superheroapi.com/api/3987559941340811/$id');
-    print('step1');
-
-    print(heroData.data['name']);
-
-    var heroModel = HeroModel.fromJson(heroData.data);
-    heroModal = heroModel;
-  } else {
-    heroModal = heroModel;
-  }
-  return heroModal;
 }

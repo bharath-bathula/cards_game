@@ -20,13 +20,16 @@ class StartPage extends StatelessWidget {
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Color(0xffF98700)),
-                child: Text('Start Game'),
+                child: Text(
+                  'Start Game',
+                  style: TextStyle(fontSize: 20),
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, CardData.route);
                 },
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.29,
+                height: MediaQuery.of(context).size.height * 0.288,
               ),
               Image.asset('assets/superheroflying.png'),
             ],

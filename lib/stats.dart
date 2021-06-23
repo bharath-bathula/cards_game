@@ -1,4 +1,3 @@
-import 'package:cards_game/start_page.dart';
 import 'package:flutter/material.dart';
 
 class Stats extends StatelessWidget {
@@ -62,7 +61,8 @@ class Stats extends StatelessWidget {
                     ),
                     IconButton(
                         onPressed: () {
-                          Navigator.popAndPushNamed(context, StartPage.route);
+                          Navigator.of(context)
+                              .popUntil((route) => route.isFirst);
                         },
                         icon: Icon(
                           Icons.home,
@@ -130,8 +130,8 @@ class Stats extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              Navigator.popAndPushNamed(
-                                  context, StartPage.route);
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
                             },
                             icon: Icon(
                               Icons.home,
@@ -204,8 +204,10 @@ class Stats extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              Navigator.popAndPushNamed(
-                                  context, StartPage.route);
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                              // Navigator.popAndPushNamed(
+                              //     context, StartPage.route);
                             },
                             icon: Icon(
                               Icons.home,

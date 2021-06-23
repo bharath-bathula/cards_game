@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Classic Comic Cards',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'ComicBooks'),
       // home: StartPage(),

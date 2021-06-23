@@ -68,12 +68,14 @@ class _CardDataState extends State<CardData> {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(25)),
-                              child: Text(
-                                '${snapshot.data!.name}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23,
-                                    color: Color(0xFF657d6b)),
+                              child: FittedBox(
+                                child: Text(
+                                  '${snapshot.data!.name}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 23,
+                                      color: Color(0xFF657d6b)),
+                                ),
                               ),
                             ),
                             MaterialButton(
@@ -95,9 +97,6 @@ class _CardDataState extends State<CardData> {
                       Card(
                         margin: EdgeInsets.all(7),
                         elevation: 30,
-                        // shape: RoundedRectangleBorder(
-                        //   borderRadius: BorderRadius.circular(15),
-                        // ),
                         child: Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
@@ -105,8 +104,6 @@ class _CardDataState extends State<CardData> {
                                     'assets/cardbackground.jpg',
                                   ),
                                   fit: BoxFit.cover)),
-                          // height: MediaQuery.of(context).size.height * 0.718,
-                          // padding: const EdgeInsets.all(8.0),
                           child: Column(children: [
                             Stack(children: [
                               Container(
@@ -115,6 +112,7 @@ class _CardDataState extends State<CardData> {
                                     MediaQuery.of(context).size.height * 0.35,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
+                                    color: Colors.grey.withOpacity(0.7),
                                     image: DecorationImage(
                                         image: NetworkImage(
                                           snapshot.data!.image.url,
@@ -126,10 +124,15 @@ class _CardDataState extends State<CardData> {
                                         sigmaX: 2.0, sigmaY: 2.0),
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data!.image.url,
-                                      placeholder: (context, url) => Image(
-                                        image: AssetImage('assets/loading.jpg'),
-                                        fit: BoxFit.cover,
-                                      ),
+                                      // placeholder: (context, url) => Center(
+                                      //     child: Image.asset(
+                                      //   'assets/unnamed.gif',
+                                      //   fit: BoxFit.cover,
+                                      // )),
+                                      // Image(
+                                      //   image: AssetImage('assets/loading.png'),
+                                      //   fit: BoxFit.fitHeight,
+                                      // ),
                                       errorWidget: (context, url, error) =>
                                           Icon(Icons.error),
                                     ),
@@ -396,7 +399,7 @@ class _CardDataState extends State<CardData> {
                 showDialog(context: context, builder: (_) => (Text("Error")));
               }
               return Center(
-                child: CircularProgressIndicator(),
+                child: Image.asset('assets/loading.gif'),
               );
             }),
       ),

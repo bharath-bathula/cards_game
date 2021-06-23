@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 import './card_data.dart';
 import './guide.dart';
 
-class StartPage extends StatelessWidget {
+class StartPage extends StatefulWidget {
   static const route = 'start';
+
   const StartPage({Key? key}) : super(key: key);
+
+  @override
+  _StartPageState createState() => _StartPageState();
+}
+
+class _StartPageState extends State<StartPage> {
+  @override
+  void initState() {
+    AssetsAudioPlayer().open(
+      Audio("assets/audios/bg.mp3"),
+      loopMode: LoopMode.single,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

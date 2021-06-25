@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cards_game/guide.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -17,12 +16,16 @@ class CardData extends StatefulWidget {
 }
 
 class _CardDataState extends State<CardData> {
-  late Future<HeroModel> data = dataReturn();
-  int wins = 0;
-  int lost = 0;
+  var wins = 0;
+  var lost = 0;
+  var value = 0;
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Arguments;
+    var finalList = args.ids;
+    late Future<HeroModel> data = dataReturn(finalList[value]);
+
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder<HeroModel>(
@@ -122,25 +125,12 @@ class _CardDataState extends State<CardData> {
                                   child: BackdropFilter(
                                     filter: ImageFilter.blur(
                                         sigmaX: 2.0, sigmaY: 2.0),
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data!.image.url,
-                                      // placeholder: (context, url) => Center(
-                                      //     child: Image.asset(
-                                      //   'assets/unnamed.gif',
-                                      //   fit: BoxFit.cover,
-                                      // )),
-                                      // Image(
-                                      //   image: AssetImage('assets/loading.png'),
-                                      //   fit: BoxFit.fitHeight,
-                                      // ),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
+                                    child: Image(
+                                      fit: BoxFit.fitHeight,
+                                      image: NetworkImage(
+                                        snapshot.data!.image.url,
+                                      ),
                                     ),
-                                    //  Image(
-                                    //   fit: BoxFit.fitHeight,
-                                    //   image: NetworkImage(
-                                    //     snapshot.data!.image.url,
-                                    //   ),
                                   ),
                                 ),
                               ),
@@ -355,7 +345,7 @@ class _CardDataState extends State<CardData> {
                                     arguments: ScreenArguments(wins, lost));
                               } else {
                                 setState(() {
-                                  data = dataReturn();
+                                  value++;
                                 });
                               }
                             },
@@ -378,7 +368,7 @@ class _CardDataState extends State<CardData> {
                                     arguments: ScreenArguments(wins, lost));
                               } else {
                                 setState(() {
-                                  data = dataReturn();
+                                  value++;
                                 });
                               }
                             },
@@ -405,4 +395,10 @@ class _CardDataState extends State<CardData> {
       ),
     );
   }
+}
+
+class Arguments {
+  final List<int> ids;
+
+  Arguments(this.ids);
 }

@@ -14,9 +14,11 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
+  var assetsAudioPlayer;
   @override
   void initState() {
-    AssetsAudioPlayer().open(
+    assetsAudioPlayer = AssetsAudioPlayer();
+    assetsAudioPlayer.open(
       Audio("assets/audios/bg.mp3"),
       loopMode: LoopMode.single,
     );
@@ -52,6 +54,7 @@ class _StartPageState extends State<StartPage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
+                  assetsAudioPlayer.stop();
                   Navigator.pushNamed(context, CardData.route);
                 },
               ),

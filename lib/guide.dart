@@ -40,14 +40,14 @@ class Guide extends StatelessWidget {
                 padding: EdgeInsets.all(12),
                 child: Text(
                   '''• Decide who goes first. \n
-• The first person calls a category and the accompanying number e.g., "POWER : 89". \n
+• The first person calls a category and the accompanying value e.g., "POWER : 89". \n
 • The other player must the call at the same category that appears on their card. \n
 • The player with the highest under the the selected category wins the round.\n
 • The winner will tap the Win(Green) button. \n
 • The loser will tap the Lost(Red) button. \n
 • The  winner of each round chooses first in the next round. \n
 • In the case of a draw within a round both players tap on Win button.\n
-• After drawing 60 cards the game will end.\n
+• After drawing 30 cards the game will end.\n
 • The player with more wins will be the winner''',
                   style: TextStyle(fontSize: 18),
                 ),

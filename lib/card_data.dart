@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cards_game/guide.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutter/services.dart';
 
 import './logic.dart';
 import './hero_model.dart';
@@ -19,6 +20,19 @@ class _CardDataState extends State<CardData> {
   var wins = 0;
   var lost = 0;
   var value = 0;
+
+  @override
+  void initState() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIOverlays(
+        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +54,7 @@ class _CardDataState extends State<CardData> {
               } else if (snapshot.hasData) {
                 return Container(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
                         height: 50,
@@ -340,7 +355,7 @@ class _CardDataState extends State<CardData> {
                               lost++;
                               print("lost");
 
-                              if (wins + lost >= 60) {
+                              if (wins + lost >= 30) {
                                 Navigator.pushNamed(context, Stats.route,
                                     arguments: ScreenArguments(wins, lost));
                               } else {
@@ -363,7 +378,7 @@ class _CardDataState extends State<CardData> {
                               print("wins");
                               print(wins);
 
-                              if (wins + lost >= 60) {
+                              if (wins + lost >= 30) {
                                 Navigator.pushNamed(context, Stats.route,
                                     arguments: ScreenArguments(wins, lost));
                               } else {

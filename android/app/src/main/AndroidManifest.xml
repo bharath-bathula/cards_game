@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cards_game">
+    package="com.abcdevs.cards_game">
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="Classic Comic Cards"
         android:icon="@mipmap/ic_launcher">
